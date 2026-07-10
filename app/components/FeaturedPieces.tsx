@@ -18,6 +18,7 @@ const cardVariants = {
 
 interface PieceCard {
   imageId: "feature_1" | "feature_2" | "feature_3";
+  alt: string;
   name: string;
   description: string;
   spec: string;
@@ -27,26 +28,29 @@ interface PieceCard {
 const pieces: PieceCard[] = [
   {
     imageId: "feature_1",
+    alt: "The Alder Tote — vegetable-tanned walnut leather carryall",
     name: "The Alder Tote",
     description:
       "An unlined carryall designed for daily utility. The open-top construction highlights the raw texture of the walnut leather, while the reinforced base handles the weight of a life in motion.",
-    spec: `VEGETABLE-TANNED WALNUT LEATHER / SOLID BRASS RIVETS / 14\u201d X 16\u201d X 6\u201d`,
+    spec: `VEGETABLE-TANNED WALNUT LEATHER / SOLID BRASS RIVETS / 14" X 16" X 6"`,
     offsetDesktop: false,
   },
   {
     imageId: "feature_2",
+    alt: "The Field Wallet — full-grain saddle-tan bifold",
     name: "The Field Wallet",
     description:
       "A four-card bifold that disappears in a pocket. Built from a single piece of saddle-tan hide, it is designed to stretch and mold to your carry over the first month of use.",
-    spec: `FULL-GRAIN SADDLE-TAN LEATHER / WAXED LINEN THREAD / 3\u201d X 4\u201d`,
+    spec: `FULL-GRAIN SADDLE-TAN LEATHER / WAXED LINEN THREAD / 3" X 4"`,
     offsetDesktop: true,
   },
   {
     imageId: "feature_3",
+    alt: "The Maker\u2019s Roll — olive waxed canvas tool wrap",
     name: "The Maker\u2019s Roll",
     description:
       "A protective wrap for the tools of your trade. Combining olive waxed canvas with leather accents, it provides a weather-resistant home for pens, knives, or brushes.",
-    spec: `18OZ WAXED CANVAS / WALNUT LEATHER STRAPS / 12\u201d X 10\u201d UNROLLED`,
+    spec: `18OZ WAXED CANVAS / WALNUT LEATHER STRAPS / 12" X 10" UNROLLED`,
     offsetDesktop: false,
   },
 ];
@@ -84,6 +88,7 @@ export default function FeaturedPieces() {
                 <div className="aspect-[4/5] w-full overflow-hidden">
                   <ProjectImage
                     id={piece.imageId}
+                    alt={piece.alt}
                     className="w-full h-full object-cover"
                   />
                 </div>
@@ -145,6 +150,7 @@ export default function FeaturedPieces() {
                 <div className="aspect-[4/5] w-full overflow-hidden">
                   <ProjectImage
                     id={piece.imageId}
+                    alt={piece.alt}
                     className="w-full h-full object-cover"
                   />
                 </div>
