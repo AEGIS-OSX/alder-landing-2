@@ -36,7 +36,7 @@ export default function Hero() {
   return (
     <section
       aria-label="Hero"
-      className="w-full bg-[var(--color-bg)] pt-[96px] pb-[160px] md:pt-[128px]"
+      className="w-full bg-[var(--color-bg)] pt-[128px] pb-[160px]"
     >
       <div className="alder-container">
         <div className="grid grid-cols-1 md:grid-cols-[58fr_42fr] gap-[48px] items-center">
@@ -52,7 +52,7 @@ export default function Hero() {
 
             {/* H1 */}
             <motion.h1
-              className="font-[family-name:var(--font-display)] text-[40px] leading-[46px] md:text-[64px] md:leading-[68px] tracking-[-0.03em] font-semibold text-[var(--color-text)] overflow-wrap-anywhere min-w-0"
+              className="font-[family-name:var(--font-display)] text-[40px] leading-[46px] md:text-[64px] md:leading-[68px] tracking-[-0.03em] font-semibold text-[var(--color-text)] [overflow-wrap:anywhere] min-w-0"
               {...itemProps}
             >
               Leather goods, made slowly.
