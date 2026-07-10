@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type ChangeEvent, type FormEvent } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
@@ -14,7 +14,7 @@ export default function WaitlistCTA() {
 
   const isValidEmail = EMAIL_RE.test(email);
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (!isValidEmail) {
       setErrorMessage("Please enter a valid email address.");
@@ -97,7 +97,7 @@ export default function WaitlistCTA() {
                   required
                   placeholder="Email address"
                   value={email}
-                  onChange={(e) => {
+                  onChange={(e: ChangeEvent<HTMLInputElement>) => {
                     setEmail(e.target.value);
                     if (formState === "error") {
                       setFormState("idle");
