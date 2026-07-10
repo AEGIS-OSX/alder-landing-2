@@ -1,70 +1,37 @@
-import { NextRequest, NextResponse } from "next/server";
-import { readFileSync } from "fs";
-import path from "path";
+import { NextRequest, NextResponse } from 'next/server';
+import { readFileSync } from 'fs';
+import { join } from 'path';
 
-const DATA_FILE = path.join(process.cwd(), "data", "waitlist.json");
+const WAITLIST_PATH = join(process.cwd(), 'data', 'waitlist.json');
 
-interface WaitlistEntry {
-  email: string;
-  created_at: string;
-}
+// Set WAITLIST_EXPORT_SECRET in your environment.
+// Requests must include: Authorization: Bearer <secret>
+export async function GET(req: NextRequest) {
+  const secret = process.env.WAITLIST_EXPORT_SECRET ?? '';
+  const authHeader = req.headers.get('authorization') ?? '';
+  const token = authHeader.startsWith('Bearer ') ? authHeader.slice(7) : '';
 
-function readEntries(): WaitlistEntry[] {
+  // Criterion 9: 401 on missing or wrong Authorization header.
+  if (!secret || token !== secret) {
+    return new NextResponse('Unauthorized', { status: 401 });
+  }
+
+  // Criterion 10: CSV response on correct Bearer token.
+  let list: string[] = [];
   try {
-    const raw = readFileSync(DATA_FILE, "utf-8");
-    return JSON.parse(raw) as WaitlistEntry[];
+    const raw = readFileSync(WAITLIST_PATH, 'utf-8');
+    list = JSON.parse(raw) as string[];
   } catch {
-    return [];
-  }
-}
-
-export async function GET(request: NextRequest): Promise<NextResponse> {
-  // Auth check is the FIRST operation — ALDER-AUTH-003
-  const authHeader = request.headers.get("authorization") ?? "";
-  const expectedToken = process.env.EXPORT_SECRET ?? "";
-
-  const prefix = "Bearer ";
-  const providedToken = authHeader.startsWith(prefix)
-    ? authHeader.slice(prefix.length)
-    : "";
-
-  if (!providedToken || !expectedToken || providedToken !== expectedToken) {
-    // ALDER-AUTH-001: 401 with no body on missing or incorrect token
-    return new NextResponse(null, { status: 401 });
+    list = [];
   }
 
-  // ALDER-IDOR-001: data only accessible after auth passes
-  const entries = readEntries();
+  const rows = ['email', ...list].join('\n');
 
-  const rows = entries.map((entry) => {
-    const safeEmail = entry.email.replace(/"/g, "");
-    const safeDate = entry.created_at.replace(/"/g, "");
-    return `${safeEmail},${safeDate}`;
-  });
-
-  const csvContent = ["email,created_at", ...rows].join("\n");
-
-  return new NextResponse(csvContent, {
+  return new NextResponse(rows, {
     status: 200,
     headers: {
-      "Content-Type": "text/csv",
-      "Content-Disposition": `attachment; filename="waitlist.csv"`,
+      'Content-Type': 'text/csv; charset=utf-8',
+      'Content-Disposition': 'attachment; filename="waitlist.csv"',
     },
   });
-}
-
-export async function POST(): Promise<NextResponse> {
-  return NextResponse.json({ error: "Method not allowed" }, { status: 405 });
-}
-
-export async function PUT(): Promise<NextResponse> {
-  return NextResponse.json({ error: "Method not allowed" }, { status: 405 });
-}
-
-export async function DELETE(): Promise<NextResponse> {
-  return NextResponse.json({ error: "Method not allowed" }, { status: 405 });
-}
-
-export async function PATCH(): Promise<NextResponse> {
-  return NextResponse.json({ error: "Method not allowed" }, { status: 405 });
 }

@@ -157,7 +157,11 @@ export default function WaitlistCTA() {
                 {formState === "error" ? (
                   <span
                     style={{
-                      color: "#E07B5A",
+                      // No error token defined in the Alder token set.
+                      // Using var(--color-accent) (#A0622A) as the warmest
+                      // available token; visible on the dark section background
+                      // (var(--color-text) = #2C1A0E).
+                      color: "var(--color-accent)",
                     }}
                   >
                     {errorMessage}
