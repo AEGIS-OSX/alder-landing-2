@@ -1,50 +1,75 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { readFileSync, writeFileSync, mkdirSync } from 'fs';
-import { join, dirname } from 'path';
+import { NextRequest, NextResponse } from "next/server";
+import { promises as fs } from "fs";
+import path from "path";
 
-const WAITLIST_PATH = join(process.cwd(), 'data', 'waitlist.json');
+const DATA_FILE = path.join(process.cwd(), "data", "waitlist.json");
 
 const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 
-function readWaitlist(): string[] {
+type WaitlistEntry = {
+  email: string;
+  joinedAt: string;
+};
+
+async function readEntries(): Promise<WaitlistEntry[]> {
   try {
-    const raw = readFileSync(WAITLIST_PATH, 'utf-8');
-    return JSON.parse(raw) as string[];
+    const raw = await fs.readFile(DATA_FILE, "utf-8");
+    return JSON.parse(raw) as WaitlistEntry[];
   } catch {
     return [];
   }
 }
 
-function writeWaitlist(list: string[]): void {
-  mkdirSync(dirname(WAITLIST_PATH), { recursive: true });
-  writeFileSync(WAITLIST_PATH, JSON.stringify(list, null, 2), 'utf-8');
+async function writeEntries(entries: WaitlistEntry[]): Promise<void> {
+  await fs.writeFile(DATA_FILE, JSON.stringify(entries, null, 2), "utf-8");
 }
 
-// Only POST is handled; Next.js App Router returns 405 automatically
-// for GET, PUT, DELETE, PATCH when those exports are absent.
-export async function POST(req: NextRequest) {
-  let body: { email?: unknown };
+export async function POST(req: NextRequest): Promise<NextResponse> {
+  let body: unknown;
   try {
     body = await req.json();
   } catch {
-    return NextResponse.json({ error: 'Invalid JSON' }, { status: 400 });
+    return NextResponse.json({ error: "Invalid JSON." }, { status: 400 });
   }
 
-  const email = typeof body.email === 'string' ? body.email.trim().toLowerCase() : '';
-
-  if (!email || !EMAIL_RE.test(email)) {
-    return NextResponse.json({ error: 'Invalid email' }, { status: 400 });
+  if (
+    typeof body !== "object" ||
+    body === null ||
+    typeof (body as Record<string, unknown>).email !== "string"
+  ) {
+    return NextResponse.json({ error: "Email is required." }, { status: 400 });
   }
 
-  const list = readWaitlist();
+  const email = ((body as Record<string, unknown>).email as string).trim().toLowerCase();
 
-  if (list.includes(email)) {
-    return NextResponse.json({ error: 'Already on the list' }, { status: 409 });
+  if (!EMAIL_RE.test(email)) {
+    return NextResponse.json({ error: "Invalid email address." }, { status: 422 });
   }
 
-  list.push(email);
-  writeWaitlist(list);
+  const entries = await readEntries();
 
-  // Criterion 8: success body is exactly { ok: true } -- no email, id, or count.
-  return NextResponse.json({ ok: true }, { status: 200 });
+  if (entries.some((e) => e.email === email)) {
+    return NextResponse.json({ error: "Already on the waitlist." }, { status: 409 });
+  }
+
+  entries.push({ email, joinedAt: new Date().toISOString() });
+  await writeEntries(entries);
+
+  return NextResponse.json({ ok: true }, { status: 201 });
+}
+
+export function GET(): NextResponse {
+  return NextResponse.json({ error: "Method not allowed." }, { status: 405 });
+}
+
+export function PUT(): NextResponse {
+  return NextResponse.json({ error: "Method not allowed." }, { status: 405 });
+}
+
+export function DELETE(): NextResponse {
+  return NextResponse.json({ error: "Method not allowed." }, { status: 405 });
+}
+
+export function PATCH(): NextResponse {
+  return NextResponse.json({ error: "Method not allowed." }, { status: 405 });
 }

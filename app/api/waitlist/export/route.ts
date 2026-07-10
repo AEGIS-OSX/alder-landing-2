@@ -1,37 +1,55 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { readFileSync } from 'fs';
-import { join } from 'path';
+import { NextRequest, NextResponse } from "next/server";
+import { promises as fs } from "fs";
+import path from "path";
 
-const WAITLIST_PATH = join(process.cwd(), 'data', 'waitlist.json');
+const DATA_FILE = path.join(process.cwd(), "data", "waitlist.json");
 
-// Set WAITLIST_EXPORT_SECRET in your environment.
-// Requests must include: Authorization: Bearer <secret>
-export async function GET(req: NextRequest) {
-  const secret = process.env.WAITLIST_EXPORT_SECRET ?? '';
-  const authHeader = req.headers.get('authorization') ?? '';
-  const token = authHeader.startsWith('Bearer ') ? authHeader.slice(7) : '';
+type WaitlistEntry = {
+  email: string;
+  joinedAt: string;
+};
 
-  // Criterion 9: 401 on missing or wrong Authorization header.
-  if (!secret || token !== secret) {
-    return new NextResponse('Unauthorized', { status: 401 });
-  }
-
-  // Criterion 10: CSV response on correct Bearer token.
-  let list: string[] = [];
+async function readEntries(): Promise<WaitlistEntry[]> {
   try {
-    const raw = readFileSync(WAITLIST_PATH, 'utf-8');
-    list = JSON.parse(raw) as string[];
+    const raw = await fs.readFile(DATA_FILE, "utf-8");
+    return JSON.parse(raw) as WaitlistEntry[];
   } catch {
-    list = [];
+    return [];
+  }
+}
+
+export async function GET(req: NextRequest): Promise<NextResponse> {
+  const { searchParams } = new URL(req.url);
+  const format = searchParams.get("format") ?? "json";
+
+  const entries = await readEntries();
+
+  if (format === "csv") {
+    const rows = ["email,joinedAt", ...entries.map((e) => `${e.email},${e.joinedAt}`)].join("\n");
+    return new NextResponse(rows, {
+      status: 200,
+      headers: {
+        "Content-Type": "text/csv",
+        "Content-Disposition": "attachment; filename=\"waitlist.csv\"",
+      },
+    });
   }
 
-  const rows = ['email', ...list].join('\n');
+  return NextResponse.json({ count: entries.length, entries }, { status: 200 });
+}
 
-  return new NextResponse(rows, {
-    status: 200,
-    headers: {
-      'Content-Type': 'text/csv; charset=utf-8',
-      'Content-Disposition': 'attachment; filename="waitlist.csv"',
-    },
-  });
+export function POST(): NextResponse {
+  return NextResponse.json({ error: "Method not allowed." }, { status: 405 });
+}
+
+export function PUT(): NextResponse {
+  return NextResponse.json({ error: "Method not allowed." }, { status: 405 });
+}
+
+export function DELETE(): NextResponse {
+  return NextResponse.json({ error: "Method not allowed." }, { status: 405 });
+}
+
+export function PATCH(): NextResponse {
+  return NextResponse.json({ error: "Method not allowed." }, { status: 405 });
 }
