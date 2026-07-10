@@ -41,7 +41,7 @@ export default function FounderStory() {
             custom={0.1}
           >
             <ProjectImage
-              id="social_proof"
+              id="founder"
               alt="James Alderton in his studio, working at a cutting table"
               className="h-full w-full rounded-[var(--card-radius)] object-cover"
               style={{ aspectRatio: "4/5" }}
@@ -67,8 +67,7 @@ export default function FounderStory() {
             {/* h2 */}
             <h2
               id="founder-heading"
-              className="mb-[var(--space-lg)] font-[family-name:var(--font-display)] text-[length:var(--text-h2)] font-normal leading-[var(--text-h2-lh)] tracking-[-0.01em] text-[var(--color-text)] md:text-[length:var(--text-h2)] md:leading-[var(--text-h2-lh)]"
-              style={{ fontSize: "var(--text-h2-mobile)", lineHeight: "var(--text-h2-lh-mobile)" }}
+              className="mb-[var(--space-lg)] font-[family-name:var(--font-display)] text-[length:var(--text-h2-mobile)] font-normal leading-[var(--text-h2-lh-mobile)] tracking-[-0.01em] text-[var(--color-text)] md:text-[length:var(--text-h2)] md:leading-[var(--text-h2-lh)]"
             >
               Ten years of getting it wrong.
             </h2>
