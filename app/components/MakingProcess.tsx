@@ -1,143 +1,146 @@
 "use client";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import { ProjectImage } from "@/app/components/ProjectImage";
 
-interface Step {
-  number: string;
-  title: string;
+type Step = {
+  numeral: string;
+  label: string;
   body: string;
-  imageId: string;
+  imageId: "feature_1" | "feature_2" | "social_proof" | "feature_3";
   imageAlt: string;
-}
+};
 
 const steps: Step[] = [
   {
-    number: "01",
-    title: "Selection",
-    body: "We source full-grain hides from tanneries that still use vegetable extracts. These skins are not corrected for imperfections; they carry the life of the animal and will darken with yours.",
+    numeral: "01",
+    label: "Selection",
+    body: `We source full-grain vegetable-tanned hides from a single tannery in León. Each hide is inspected by hand for grain consistency and temper.`,
     imageId: "feature_1",
-    imageAlt: "A hand-stitched leather seam showing material grain and craft precision.",
+    imageAlt: "Close-up of full-grain vegetable-tanned leather hide showing natural grain texture and temper",
   },
   {
-    number: "02",
-    title: "Cutting",
-    body: "Every panel is cut by hand using a traditional round knife. It is slower than a die press, but it allows us to work around the natural grain and ensure every piece of the hide is used where it is strongest.",
+    numeral: "02",
+    label: "Pattern",
+    body: `Every pattern is drafted on paper first, then cut from card stock. No digital files. The template lives on the wall of the studio.`,
     imageId: "feature_2",
-    imageAlt: "The saddle-stitching process, showing walnut leather and precision hand-stitched thread.",
+    imageAlt: "Hand-drafted leather pattern on card stock pinned to the studio wall",
   },
   {
-    number: "03",
-    title: "Stitching",
-    body: "We use a traditional saddle stitch with two needles and waxed linen thread. Unlike a machine lockstitch, a saddle stitch will not unravel if a single loop breaks. It is the strongest seam known to craft.",
-    imageId: "feature_3",
-    imageAlt: "The Maker's Roll, showing the tactile intersection of waxed canvas and saddle-tan leather.",
-  },
-  {
-    number: "04",
-    title: "Finishing",
-    body: "Edges are sanded, painted, and burnished with natural beeswax until they are smooth to the touch. This seal protects the leather from moisture and prevents the fibers from fraying over years of use.",
+    numeral: "03",
+    label: "Cutting",
+    body: `A single-bevel knife, a steel rule, and a cutting mat. Each piece is cut individually — no dies, no presses.`,
     imageId: "social_proof",
-    imageAlt: "Macro shot of the saddle-stitching process, emphasizing tactile quality of walnut leather and saddle-tan thread.",
+    imageAlt: "Craftsman cutting leather with a single-bevel knife against a steel rule on a cutting mat",
+  },
+  {
+    numeral: "04",
+    label: "Stitching",
+    body: `Saddle-stitched by hand with waxed linen thread. Two needles, one hole at a time. A machine stitch breaks at one point; a hand stitch holds even when a thread snaps.`,
+    imageId: "feature_3",
+    imageAlt: "Close-up of saddle-stitching by hand with waxed linen thread through leather",
   },
 ];
 
+const rowVariants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.08,
+    },
+  },
+};
+
+const childVariants = {
+  hidden: { opacity: 0, y: 24 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: [0.0, 0.0, 0.2, 1] as number[],
+    },
+  },
+};
+
 export default function MakingProcess() {
-  const prefersReducedMotion = useReducedMotion();
-
-  const motionProps = prefersReducedMotion
-    ? {}
-    : {
-        initial: { opacity: 0, y: 24 },
-        whileInView: { opacity: 1, y: 0 },
-        viewport: { once: true, margin: "-60px" },
-        transition: { duration: 0.5, ease: "easeOut" },
-      };
-
   return (
     <section
-      aria-labelledby="process-heading"
-      className="w-full bg-[var(--color-bg)] py-[96px]"
+      id="process"
+      aria-label="Making process"
+      className="bg-[var(--color-surface)] py-[var(--space-section)]"
     >
-      <div className="alder-container">
-        {/* Section header */}
-        <div className="mb-[48px]">
-          <p className="spec-text text-[var(--color-accent)] mb-[8px]">Craft</p>
-          <h2
-            id="process-heading"
-            className="font-[family-name:var(--font-display)] text-[26px] leading-[32px] md:text-[36px] md:leading-[42px] tracking-[-0.01em] font-normal text-[var(--color-text)]"
-          >
-            How a piece gets made.
-          </h2>
-        </div>
+      <div className="mx-auto w-full max-w-[var(--layout-max-width)] px-[var(--space-xl)]">
+        {/* Hairline rule */}
+        <div
+          className="border-t border-[var(--color-border)] mb-[var(--space-xxl)]"
+          role="presentation"
+        />
 
-        {/* Steps list */}
+        {/* Section heading */}
+        <h2
+          className="font-[family-name:var(--font-display)] text-[var(--text-h2)] leading-[var(--text-h2-lh)] font-normal tracking-[-0.01em] text-[var(--color-text)] mb-[var(--space-xxl)]"
+        >
+          How a piece gets made.
+        </h2>
+
+        {/* Steps */}
         <ol className="list-none m-0 p-0">
           {steps.map((step, index) => {
-            const isOdd = (index + 1) % 2 !== 0;
-
+            const isEven = index % 2 === 1;
             return (
-              <li key={step.number}>
-                <hr className="hairline" />
+              <li key={step.numeral}>
                 <motion.div
-                  {...motionProps}
-                  className="relative py-[48px]"
+                  className="grid grid-cols-1 md:grid-cols-2 gap-[var(--space-xxl)] items-center mb-[var(--space-huge)]"
+                  variants={rowVariants}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, margin: "-80px" }}
                 >
-                  {/* Decorative large numeral — top: 0 per spec */}
-                  <span
-                    aria-hidden="true"
-                    className="absolute top-0 left-[-16px] font-[family-name:var(--font-display)] text-[80px] leading-none font-normal text-[var(--color-text)] opacity-[0.12] select-none pointer-events-none"
+                  {/* Text column */}
+                  <motion.div
+                    className="flex flex-col"
+                    variants={childVariants}
                   >
-                    {step.number}
-                  </span>
+                    <span
+                      aria-hidden="true"
+                      className="font-[family-name:var(--font-display)] text-[80px] leading-none text-[var(--color-border)] mb-[var(--space-sm)] select-none"
+                    >
+                      {step.numeral}
+                    </span>
+                    <span className="spec-text mb-[var(--space-sm)]">
+                      {step.label}
+                    </span>
+                    <h3
+                      className="font-[family-name:var(--font-display)] text-[var(--text-h3)] leading-[var(--text-h3-lh)] md:text-[var(--text-h3)] md:leading-[var(--text-h3-lh)] font-normal text-[var(--color-text)] mb-[var(--space-md)]"
+                    >
+                      {step.label}
+                    </h3>
+                    <p
+                      className="font-[family-name:var(--font-body)] text-[var(--text-body)] leading-[var(--text-body-lh)] font-light text-[var(--color-text-muted)]"
+                    >
+                      {step.body}
+                    </p>
+                  </motion.div>
 
-                  {/* Two-column grid: odd = text left / image right; even = image left / text right */}
-                  <div
-                    className={`flex flex-col gap-[32px] md:grid md:gap-[48px] md:items-start ${
-                      isOdd
-                        ? "md:grid-cols-[55fr_45fr]"
-                        : "md:grid-cols-[45fr_55fr]"
-                    }`}
+                  {/* Image column */}
+                  <motion.div
+                    className={[
+                      "w-full",
+                      "order-[-1]",
+                      isEven ? "md:order-[-1]" : "md:order-[0]",
+                    ].join(" ")}
+                    variants={childVariants}
                   >
-                    {/* Text column — always first in DOM; CSS order swaps on desktop for even steps */}
-                    <div
-                      className={`relative z-10 ${
-                        isOdd ? "" : "md:order-2"
-                      }`}
-                    >
-                      <p className="font-[family-name:var(--font-body)] text-[13px] leading-[20px] font-normal tracking-[0.06em] uppercase text-[var(--color-accent)] mb-[8px]">
-                        {step.number}
-                      </p>
-                      <h3 className="font-[family-name:var(--font-display)] text-[19px] leading-[25px] md:text-[22px] md:leading-[28px] font-normal text-[var(--color-text)] mb-[16px]">
-                        {step.title}
-                      </h3>
-                      <p className="font-[family-name:var(--font-body)] text-[16px] leading-[26px] md:text-[17px] md:leading-[28px] font-light text-[var(--color-text-muted)] max-w-[52ch]">
-                        {step.body}
-                      </p>
-                    </div>
-
-                    {/* Image column */}
-                    <div
-                      className={`w-full ${
-                        isOdd ? "" : "md:order-1"
-                      }`}
-                    >
-                      <div className="w-full aspect-[4/3] overflow-hidden">
-                        <ProjectImage
-                          id={step.imageId}
-                          className="w-full h-full object-cover"
-                          alt={step.imageAlt}
-                        />
-                      </div>
-                    </div>
-                  </div>
+                    <ProjectImage
+                      id={step.imageId}
+                      alt={step.imageAlt}
+                      className="w-full aspect-[4/3] object-cover rounded-[var(--card-radius)]"
+                    />
+                  </motion.div>
                 </motion.div>
               </li>
             );
           })}
-          {/* Closing hairline after last step */}
-          <li aria-hidden="true">
-            <hr className="hairline" />
-          </li>
         </ol>
       </div>
     </section>
