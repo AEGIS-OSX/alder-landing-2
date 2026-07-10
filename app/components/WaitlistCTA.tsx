@@ -6,18 +6,9 @@ type FormState = "idle" | "loading" | "success" | "error";
 
 export default function WaitlistCTA() {
   const [formState, setFormState] = useState<FormState>("idle");
-  const [errorMessage, setErrorMessage] = useState<string>("");
-  const [email, setEmail] = useState<string>("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [email, setEmail] = useState("");
   const prefersReducedMotion = useReducedMotion();
-
-  const sectionVariants = prefersReducedMotion
-    ? {}
-    : {
-        initial: { opacity: 0 },
-        whileInView: { opacity: 1 },
-        viewport: { once: true, margin: "-80px" },
-        transition: { duration: 0.6, ease: "easeOut" },
-      };
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -37,7 +28,7 @@ export default function WaitlistCTA() {
       }
 
       if (res.status === 409) {
-        setErrorMessage(`You're already on the list.`);
+        setErrorMessage("You're already on the list.");
         setFormState("error");
         return;
       }
@@ -95,7 +86,7 @@ export default function WaitlistCTA() {
                 fontWeight: 400,
               }}
             >
-              {`You're on the list.`}
+              {"You're on the list."}
             </p>
           ) : (
             <form
@@ -166,9 +157,6 @@ export default function WaitlistCTA() {
                 {formState === "error" ? (
                   <span
                     style={{
-                      /* Warm red for error on dark background.
-                         No error token exists in the design system;
-                         this hex is the only permitted literal in this file. */
                       color: "#E07B5A",
                     }}
                   >
