@@ -1,37 +1,37 @@
 {
   "logo": {
-    "url": "",
-    "alt": "",
+    "url": "https://zkvkbpxrxnfynqqeytke.supabase.co/storage/v1/object/public/marketing-assets/alder-landing-2/cleo/1783642062117-logo.png",
+    "alt": "A minimalist vector logo mark for Alder featuring a geometric tree icon and serif wordmark in walnut brown (#2C1A0E) on an oat background (#F5F0E8). It establishes the brand's editorial, small-batch s",
     "width": 1024,
     "height": 1024
   },
   "hero": {
-    "url": "",
-    "alt": "",
+    "url": "https://zkvkbpxrxnfynqqeytke.supabase.co/storage/v1/object/public/marketing-assets/alder-landing-2/cleo/1783641934763-hero.png",
+    "alt": "A minimalist hero image featuring a saddle-tan leather tote on a warm oat background, emphasizing material texture and hand-stitched details through soft side-lighting and shallow depth of field.",
     "width": 1920,
     "height": 1080
   },
   "feature_1": {
-    "url": "",
-    "alt": "",
+    "url": "https://zkvkbpxrxnfynqqeytke.supabase.co/storage/v1/object/public/marketing-assets/alder-landing-2/cleo/1783641937758-feature_1.png",
+    "alt": "A macro shot of a hand-stitched leather seam, emphasizing the material grain and craft precision. The walnut brown leather and saddle-tan thread directly inherit the project's locked palette, supporti",
     "width": 800,
     "height": 600
   },
   "feature_2": {
-    "url": "",
-    "alt": "",
+    "url": "https://zkvkbpxrxnfynqqeytke.supabase.co/storage/v1/object/public/marketing-assets/alder-landing-2/cleo/1783641927192-feature_2.png",
+    "alt": "A macro shot of the saddle-stitching process, emphasizing the tactile quality of the walnut leather and the precision of the hand-stitched thread. This aligns with the 'Craft Process' section by focus",
     "width": 800,
     "height": 600
   },
   "feature_3": {
-    "url": "",
-    "alt": "",
+    "url": "https://zkvkbpxrxnfynqqeytke.supabase.co/storage/v1/object/public/marketing-assets/alder-landing-2/cleo/1783641937939-feature_3.png",
+    "alt": "A macro shot of the Maker's Roll, focusing on the tactile intersection of waxed canvas and saddle-tan leather. The warm lighting and shallow focus emphasize the 'studio journal' aesthetic and the prec",
     "width": 800,
     "height": 600
   },
   "social_proof": {
-    "url": "",
-    "alt": "",
+    "url": "https://zkvkbpxrxnfynqqeytke.supabase.co/storage/v1/object/public/marketing-assets/alder-landing-2/cleo/1783642175454-social_proof.png",
+    "alt": "A macro shot of the saddle-stitching process, emphasizing the tactile quality of the walnut leather and saddle-tan thread. It serves as a visual testament to the 'made slowly' philosophy, grounding th",
     "width": 1200,
     "height": 800
   }
