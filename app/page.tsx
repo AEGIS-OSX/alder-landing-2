@@ -10,16 +10,14 @@ import WaitlistCTA from "@/app/components/WaitlistCTA";
 
 export default function Home() {
   return (
-    <>
+    <main id="top">
       <Nav />
-      <main id="top">
-        <Hero />
-        <CraftPhilosophy />
-        <MakingProcess />
-        <FeaturedPieces />
-        <FounderStory />
-        <WaitlistCTA />
-      </main>
-    </>
+      <Hero />
+      <CraftPhilosophy />
+      <MakingProcess />
+      <FeaturedPieces />
+      <FounderStory />
+      <WaitlistCTA />
+    </main>
   );
 }
