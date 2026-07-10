@@ -15,7 +15,7 @@ export default function FounderStory() {
       <div className="founder-inner">
         <div className="founder-image-col">
           <ProjectImage
-            id="social_proof"
+            id="founder"
             className="founder-image"
             alt="The maker at work in the studio, hand-stitching a piece of walnut leather with waxed linen thread."
           />
