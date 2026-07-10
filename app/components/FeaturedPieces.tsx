@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { ProjectImage } from "@/app/components/ProjectImage";
 
 interface Piece {
-  imageId: "feature_1" | "feature_2" | "feature_3";
+  imageId: "piece-1" | "piece-2" | "piece-3";
   imageAlt: string;
   material: string;
   name: string;
@@ -12,21 +12,21 @@ interface Piece {
 
 const pieces: Piece[] = [
   {
-    imageId: "feature_1",
+    imageId: "piece-1",
     imageAlt: "The Alder Market Tote — full-grain vegetable-tanned leather in natural, with solid brass rivets and linen lining",
     material: "Full-grain veg-tan, natural",
     name: "No. 1 — The Market Tote",
     detail: "Brass rivets, linen lining",
   },
   {
-    imageId: "feature_2",
+    imageId: "piece-2",
     imageAlt: "The Alder Slim Folio — Horween Chromexcel leather in dark brown, saddle-stitched spine with card slots",
     material: "Horween Chromexcel, dark brown",
     name: "No. 2 — The Slim Folio",
     detail: "Saddle-stitched spine, card slots",
   },
   {
-    imageId: "feature_3",
+    imageId: "piece-3",
     imageAlt: "The Alder Field Wallet — vegetable-tanned shoulder leather in cognac, single pocket with coin fold",
     material: "Veg-tan shoulder, cognac",
     name: "No. 3 — The Field Wallet",
@@ -64,9 +64,9 @@ export default function FeaturedPieces() {
     <section
       id="pieces"
       aria-labelledby="featured-pieces-heading"
-      className="bg-[var(--color-bg)] py-[var(--space-section)]"
+      style={{ backgroundColor: "var(--color-bg)", paddingBlock: "var(--space-section)" }}
     >
-      <div className="mx-auto w-full max-w-[var(--layout-max-width)] px-[var(--space-xl)]">
+      <div className="section-inner">
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -76,19 +76,35 @@ export default function FeaturedPieces() {
           {/* Section hairline */}
           <hr
             aria-hidden="true"
-            className="border-t border-[var(--color-border)] mb-[var(--space-xxl)]"
+            className="hairline"
+            style={{ marginBottom: "var(--space-xxl)" }}
           />
 
           {/* Section heading */}
           <h2
             id="featured-pieces-heading"
-            className="font-[family-name:var(--font-display)] text-[length:var(--text-h2)] font-normal tracking-[-0.01em] text-[var(--color-text)] mb-[var(--space-xxl)] leading-[var(--leading-h2)]"
+            style={{
+              fontFamily: "var(--font-display)",
+              fontSize: "var(--text-h2)",
+              lineHeight: "var(--text-h2-lh)",
+              fontWeight: 400,
+              letterSpacing: "-0.01em",
+              color: "var(--color-text)",
+              marginBottom: "var(--space-xxl)",
+            }}
           >
             The first pieces.
           </h2>
 
           {/* Pieces grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-[var(--space-xl)]">
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(3, 1fr)",
+              gap: "var(--space-xl)",
+            }}
+            className="pieces-grid"
+          >
             {pieces.map((piece) => (
               <motion.article
                 key={piece.name}
@@ -97,24 +113,40 @@ export default function FeaturedPieces() {
               >
                 {/* Image — aspect-ratio 3/4 */}
                 <div
-                  className="w-full overflow-hidden mb-[var(--space-lg)]"
-                  style={{ aspectRatio: "3 / 4" }}
+                  style={{
+                    width: "100%",
+                    overflow: "hidden",
+                    aspectRatio: "3 / 4",
+                    marginBottom: "var(--space-lg)",
+                  }}
                 >
                   <ProjectImage
                     id={piece.imageId}
                     alt={piece.imageAlt}
-                    className="w-full h-full object-cover rounded-[var(--card-radius)]"
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                      borderRadius: "var(--card-radius)",
+                    }}
                   />
                 </div>
 
                 {/* Material spec */}
-                <p className="spec-text mb-[var(--space-sm)]">
+                <p className="spec-text" style={{ marginBottom: "var(--space-sm)" }}>
                   {piece.material}
                 </p>
 
                 {/* Piece name */}
                 <h3
-                  className="font-[family-name:var(--font-display)] text-[length:var(--text-h3)] font-normal text-[var(--color-text)] mb-[var(--space-sm)] leading-[var(--leading-h3)]"
+                  style={{
+                    fontFamily: "var(--font-display)",
+                    fontSize: "var(--text-h3)",
+                    lineHeight: "var(--text-h3-lh)",
+                    fontWeight: 400,
+                    color: "var(--color-text)",
+                    marginBottom: "var(--space-sm)",
+                  }}
                 >
                   {piece.name}
                 </h3>
@@ -128,6 +160,15 @@ export default function FeaturedPieces() {
           </div>
         </motion.div>
       </div>
+
+      {/* Mobile grid override */}
+      <style>{`
+        @media (max-width: 375px) {
+          .pieces-grid {
+            grid-template-columns: 1fr;
+          }
+        }
+      `}</style>
     </section>
   );
 }
