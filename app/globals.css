@@ -1,21 +1,21 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:wght@400;600;700&family=Inter:wght@400;500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --color-primary: #111111;
-  --color-accent: #111111;
-  --color-bg: #FFFFFF;
-  --color-text: #111111;
-  --color-muted: #666666;
-  --color-border: #E5E5E5;
+  --color-primary: #F5F0E8;
+  --color-accent: #A0622A;
+  --color-bg: #F5F0E8;
+  --color-text: #2C1A0E;
+  --color-muted: #6B4F35;
+  --color-border: #F5F0E8;
   --space-base: 8px;
   --radius-sm: 4px;
   --radius-md: 8px;
   --radius-lg: 16px;
-  --font-display: 'Playfair Display', Georgia, serif;
+  --font-display: 'Instrument Serif', Georgia, serif;
   --font-body: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
