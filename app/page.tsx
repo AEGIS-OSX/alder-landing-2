@@ -6,7 +6,6 @@ import CraftPhilosophy from "@/app/components/CraftPhilosophy";
 import MakingProcess from "@/app/components/MakingProcess";
 import FeaturedPieces from "@/app/components/FeaturedPieces";
 import FounderStory from "@/app/components/FounderStory";
-import WaitlistCTA from "@/app/components/WaitlistCTA";
 
 export default function Home() {
   return (
@@ -17,7 +16,6 @@ export default function Home() {
       <MakingProcess />
       <FeaturedPieces />
       <FounderStory />
-      <WaitlistCTA />
     </main>
   );
 }
