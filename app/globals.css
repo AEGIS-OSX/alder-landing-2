@@ -194,3 +194,52 @@ h4 {
   cursor: not-allowed;
   pointer-events: none;
 }
+
+/* --------------------------------------------------------------------------
+   9. Nav
+   -------------------------------------------------------------------------- */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background-color: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
+  padding-block: var(--space-md);
+  padding-inline: var(--space-xl);
+}
+
+.nav-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: var(--max-width);
+  margin-inline: auto;
+}
+
+.nav-wordmark {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  text-decoration: none;
+  color: var(--color-text);
+}
+
+.nav-logo {
+  height: 32px;
+  width: auto;
+}
+
+.nav-wordmark-text {
+  font-family: var(--font-display);
+  font-size: var(--text-nav);
+  font-weight: 600;
+  letter-spacing: var(--text-nav-tracking);
+  text-transform: uppercase;
+  color: var(--color-text);
+}
+
+@media (max-width: 768px) {
+  .nav {
+    padding-inline: var(--space-lg);
+  }
+}
