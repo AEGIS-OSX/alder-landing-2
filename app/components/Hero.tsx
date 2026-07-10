@@ -69,9 +69,12 @@ export default function Hero() {
         <motion.div
           className="relative h-full min-h-[30rem] order-first md:order-none"
           initial={{ opacity: 0 }}
-          animate={{ opacity: prefersReduced ? 1 : undefined }}
-          variants={prefersReduced ? undefined : undefined}
-          transition={{ duration: 0.8, delay: 0.2, ease: [0.0, 0.0, 0.2, 1] }}
+          animate={{ opacity: 1 }}
+          transition={{
+            duration: prefersReduced ? 0 : 0.8,
+            delay: prefersReduced ? 0 : 0.2,
+            ease: [0.0, 0.0, 0.2, 1],
+          }}
         >
           <ProjectImage
             id="hero"
