@@ -382,3 +382,103 @@ h4 {
     padding-inline: var(--space-lg);
   }
 }
+
+/* --------------------------------------------------------------------------
+   12. Craft Process
+   -------------------------------------------------------------------------- */
+.process {
+  background-color: var(--color-bg);
+  padding-block: var(--space-section);
+}
+
+.process-headline {
+  font-family: var(--font-display);
+  font-size: var(--text-h2);
+  font-weight: 400;
+  line-height: var(--text-h2-lh);
+  letter-spacing: var(--text-h2-tracking);
+  color: var(--color-text);
+  margin: 0 0 var(--space-huge);
+}
+
+.process-step {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-xxl);
+  align-items: center;
+  margin-block-end: var(--space-huge);
+}
+
+.process-step:last-child {
+  margin-block-end: 0;
+}
+
+.process-step-title-wrapper {
+  position: relative;
+}
+
+.process-step-numeral {
+  position: absolute;
+  top: -0.2em;
+  left: -0.1em;
+  font-family: var(--font-display);
+  font-size: 96px;
+  font-weight: 400;
+  color: var(--color-text);
+  opacity: 0.08;
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+}
+
+.process-step-title {
+  font-family: var(--font-display);
+  font-size: var(--text-h3);
+  font-weight: 600;
+  line-height: var(--text-h3-lh);
+  color: var(--color-text);
+  margin: 0 0 var(--space-md);
+  position: relative;
+  z-index: 1;
+}
+
+.process-step-body {
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  font-weight: 300;
+  line-height: var(--text-body-lh);
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+.process-step-image {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: var(--radius-card);
+  display: block;
+}
+
+.process-step:nth-child(even) .process-step-image-wrapper {
+  order: -1;
+}
+
+@media (max-width: 768px) {
+  .process-step {
+    grid-template-columns: 1fr;
+  }
+
+  .process-step-text {
+    order: 1;
+  }
+
+  .process-step-image-wrapper {
+    order: 2;
+  }
+
+  .process-step:nth-child(even) .process-step-image-wrapper {
+    order: 2;
+  }
+}
