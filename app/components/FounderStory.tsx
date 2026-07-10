@@ -5,24 +5,6 @@ import { ProjectImage } from "@/app/components/ProjectImage";
 export default function FounderStory() {
   const reduced = useReducedMotion();
 
-  const leftVariants = reduced
-    ? {}
-    : {
-        initial: { opacity: 0, x: -24 },
-        whileInView: { opacity: 1, x: 0 },
-        viewport: { once: true, margin: "-80px" },
-        transition: { duration: 0.6, ease: "easeOut" },
-      };
-
-  const rightVariants = reduced
-    ? {}
-    : {
-        initial: { opacity: 0, x: 24 },
-        whileInView: { opacity: 1, x: 0 },
-        viewport: { once: true, margin: "-80px" },
-        transition: { duration: 0.6, delay: 0.1, ease: "easeOut" },
-      };
-
   return (
     <section
       aria-labelledby="founder-heading"
@@ -45,7 +27,8 @@ export default function FounderStory() {
             <div className="relative" style={{ aspectRatio: "3/4" }}>
               <ProjectImage
                 id="social_proof"
-                className="w-full h-full object-cover"
+                className="w-full h-auto object-cover"
+                alt="The maker at work in her one-room studio, saddle-stitching a leather piece."
               />
               <div
                 aria-hidden="true"
@@ -86,7 +69,7 @@ export default function FounderStory() {
 
             {/* Pull quote */}
             <blockquote
-              className="font-[family-name:var(--font-display)] text-[22px] leading-[28px] font-normal italic text-[var(--color-text)] mb-[32px] not-italic"
+              className="font-[family-name:var(--font-display)] text-[22px] leading-[28px] font-normal italic text-[var(--color-text)] mb-[32px]"
               style={{ fontStyle: "italic" }}
             >
               &#8220;The work is finished when there is nothing left to take away.&#8221;
