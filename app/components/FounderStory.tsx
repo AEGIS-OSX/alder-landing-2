@@ -1,91 +1,97 @@
 "use client";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import { ProjectImage } from "@/app/components/ProjectImage";
 
-export default function FounderStory() {
-  const reduced = useReducedMotion();
+const fadeUp = {
+  hidden: { opacity: 0, y: 24 },
+  visible: (delay: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      delay,
+      ease: [0.0, 0.0, 0.2, 1],
+    },
+  }),
+};
 
+export default function FounderStory() {
   return (
     <section
+      id="founder"
       aria-labelledby="founder-heading"
-      className="w-full bg-[var(--color-bg)] py-[96px]"
+      className="bg-[var(--color-surface)] py-[var(--space-section)]"
     >
-      <div className="alder-container">
-        <div className="flex flex-col md:flex-row md:gap-[64px] gap-[48px] items-start">
-          {/* Left column — portrait image, 42% on desktop */}
+      <div className="mx-auto w-full max-w-[var(--layout-max-width)] px-[var(--space-xl)]">
+        {/* Hairline rule */}
+        <div
+          className="mb-[var(--space-xxl)] h-px w-full bg-[var(--color-border)]"
+          role="presentation"
+        />
+
+        {/* Two-column grid: 55fr text / 45fr image on desktop; single column on mobile */}
+        <div className="grid grid-cols-1 gap-[var(--space-xxl)] md:grid-cols-[55fr_45fr] md:gap-[var(--space-huge)]">
+          {/* IMAGE COLUMN — above text on mobile, right on desktop */}
           <motion.div
-            className="w-full md:w-[42%] flex-shrink-0"
-            {...(reduced
-              ? {}
-              : {
-                  initial: { opacity: 0, x: -24 },
-                  whileInView: { opacity: 1, x: 0 },
-                  viewport: { once: true, margin: "-80px" },
-                  transition: { duration: 0.6, ease: "easeOut" },
-                })}
+            className="order-first md:order-last"
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-80px" }}
+            custom={0.1}
           >
-            <div className="relative" style={{ aspectRatio: "3/4" }}>
-              <ProjectImage
-                id="social_proof"
-                className="w-full h-auto object-cover"
-                alt="The maker at work in her one-room studio, saddle-stitching a leather piece."
-              />
-              <div
-                aria-hidden="true"
-                className="absolute inset-0"
-                style={{
-                  backgroundColor: "var(--color-text)",
-                  opacity: 0.06,
-                }}
-              />
-            </div>
+            <ProjectImage
+              id="social_proof"
+              alt="James Alderton in his studio, working at a cutting table"
+              className="h-full w-full rounded-[var(--card-radius)] object-cover"
+              style={{ aspectRatio: "4/5" }}
+            />
           </motion.div>
 
-          {/* Right column — text, 58% on desktop */}
+          {/* TEXT COLUMN */}
           <motion.div
-            className="w-full md:w-[58%] flex flex-col justify-center"
-            {...(reduced
-              ? {}
-              : {
-                  initial: { opacity: 0, x: 24 },
-                  whileInView: { opacity: 1, x: 0 },
-                  viewport: { once: true, margin: "-80px" },
-                  transition: { duration: 0.6, delay: 0.1, ease: "easeOut" },
-                })}
+            className="order-last flex flex-col justify-center md:order-first"
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-80px" }}
+            custom={0}
           >
-            {/* Eyebrow */}
+            {/* Spec label */}
             <p
-              id="founder-heading"
-              className="text-[var(--color-text-muted)] uppercase tracking-[0.06em] text-[13px] leading-[20px] mb-[24px]"
+              className="mb-[var(--space-lg)] font-[family-name:var(--font-body)] text-[length:var(--text-spec)] font-normal uppercase tracking-[0.06em] text-[var(--color-text-muted)]"
             >
               The maker
             </p>
 
-            {/* Accent rule */}
-            <span
-              aria-hidden="true"
-              className="accent-rule mb-[16px]"
-            />
+            {/* h2 */}
+            <h2
+              id="founder-heading"
+              className="mb-[var(--space-lg)] font-[family-name:var(--font-display)] text-[length:var(--text-h2)] font-normal leading-[var(--text-h2-lh)] tracking-[-0.01em] text-[var(--color-text)] md:text-[length:var(--text-h2)] md:leading-[var(--text-h2-lh)]"
+              style={{ fontSize: "var(--text-h2-mobile)", lineHeight: "var(--text-h2-lh-mobile)" }}
+            >
+              Ten years of getting it wrong.
+            </h2>
 
             {/* Pull quote */}
             <blockquote
-              className="font-[family-name:var(--font-display)] text-[22px] leading-[28px] font-normal italic text-[var(--color-text)] mb-[32px]"
-              style={{ fontStyle: "italic" }}
+              className="my-[var(--space-xl)] border-l-[3px] border-[var(--color-accent)] pl-[var(--space-lg)] font-[family-name:var(--font-display)] text-[length:var(--text-h3)] italic leading-[var(--text-h3-lh)] text-[var(--color-text)]"
             >
-              &#8220;The work is finished when there is nothing left to take away.&#8221;
+              I spent a decade making things I was not proud of. Then I stopped trying to make them faster.
             </blockquote>
 
-            {/* Body paragraphs */}
-            <p className="font-[family-name:var(--font-body)] text-[17px] leading-[28px] font-light text-[var(--color-text)] mb-[24px]">
-              I spent a decade as a furniture upholsterer, working with fabrics that were meant to be replaced. I wanted to work with something that stayed. I spent four years learning the saddle stitch at night, practicing on scraps until the tension was exact.
+            {/* Body paragraph */}
+            <p
+              className="max-w-[55ch] font-[family-name:var(--font-body)] text-[length:var(--text-body)] font-light leading-[var(--text-body-lh)] text-[var(--color-text-muted)]"
+            >
+              My name is James. I learned to stitch in a saddlery in Córdoba, spent three years making mistakes on other people’s leather, and came home to build something slower. Alder is one person, one room, and a waiting list.
             </p>
 
-            <p className="font-[family-name:var(--font-body)] text-[17px] leading-[28px] font-light text-[var(--color-text)] mb-[24px]">
-              Now, I work alone in a one-room studio. I cut every hide, punch every hole, and pull every stitch myself. There is no assembly line here. There is only the hide, the knife, and the time it takes to do the job correctly.
-            </p>
-
-            <p className="font-[family-name:var(--font-body)] text-[17px] leading-[28px] font-light text-[var(--color-text)]">
-              When you buy a piece from Alder, you are buying a decade of mistakes and the four years it took to stop making them.
+            {/* Attribution */}
+            <p
+              className="mt-[var(--space-xl)] font-[family-name:var(--font-body)] text-[length:var(--text-spec)] font-normal uppercase tracking-[0.06em] text-[var(--color-text-muted)]"
+            >
+              — James Alderton, maker
             </p>
           </motion.div>
         </div>
