@@ -62,10 +62,10 @@ export default function Hero() {
             ease: [0.0, 0.0, 0.2, 1] as [number, number, number, number],
           }}
         >
+          {/* TODO: add fetchpriority="high" to ProjectImage once scaffold team adds prop support */}
           <ProjectImage
             id="hero"
             className="hero-image"
-            fetchpriority="high"
           />
         </motion.div>
       </div>
