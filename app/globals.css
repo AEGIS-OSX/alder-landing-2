@@ -1,143 +1,13 @@
-@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:wght@400;600;700&family=Inter:wght@400;500;600&display=swap');
+/* ==========================================================================
+   Alder Landing Page — Global Styles
+   Design tokens from Ivy. All values via CSS custom properties.
+   ========================================================================== */
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
+/* --------------------------------------------------------------------------
+   1. Design Tokens
+   -------------------------------------------------------------------------- */
 :root {
-  --color-primary: #F5F0E8;
-  --color-accent: #A0622A;
-  --color-bg: #F5F0E8;
-  --color-surface: #EDE7D9;
-  --color-text: #2C1A0E;
-  --color-text-muted: #6B4F35;
-  --color-muted: #6B4F35;
-  --color-border: rgba(44, 26, 14, 0.12);
-  --space-base: 8px;
-  --radius-sm: 4px;
-  --radius-md: 8px;
-  --radius-lg: 16px;
-  --font-display: 'Tiempos Headline', 'Instrument Serif', Georgia, serif;
-  --font-body: 'Söhne', 'Geist Sans', system-ui, sans-serif;
-}
-
-html, body {
-  background: var(--color-bg);
-  color: var(--color-text);
-  font-family: var(--font-body);
-}
-
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-display);
-}
-
-/* === Alder base styles === */
-html,
-body {
-  overflow-x: clip;
-}
-
-body {
-  background-color: var(--color-bg);
-  color: var(--color-text);
-  font-family: var(--font-body);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-/* Global focus ring */
-:focus-visible {
-  outline: 2px solid var(--color-accent);
-  outline-offset: 2px;
-}
-
-/* Heading defaults */
-h1, h2, h3, h4 {
-  font-family: var(--font-display);
-  overflow-wrap: anywhere;
-  min-width: 0;
-}
-
-/* Skip link */
-.skip-link {
-  position: absolute;
-  top: -100%;
-  left: 16px;
-  background: var(--color-text);
-  color: var(--color-bg);
-  padding: 8px 16px;
-  font-family: var(--font-body);
-  font-size: 13px;
-  z-index: 9999;
-  transition: top 0.2s ease-out;
-}
-.skip-link:focus {
-  top: 8px;
-}
-
-/* Animation easing tokens */
-:root {
-  --ease-out: cubic-bezier(0.0, 0.0, 0.2, 1);
-  --ease-in-out: cubic-bezier(0.4, 0.0, 0.2, 1);
-}
-
-/* Reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
-}
-
-/* Section surface variants */
-.section-oat {
-  background-color: var(--color-bg);
-}
-.section-cream {
-  background-color: var(--color-surface);
-}
-.section-dark {
-  background-color: var(--color-text);
-  color: var(--color-bg);
-}
-
-/* Hairline rule */
-.hairline {
-  border: none;
-  border-top: 1px solid var(--color-border);
-}
-
-/* Container */
-.alder-container {
-  width: 100%;
-  max-width: 860px;
-  margin-inline: auto;
-  padding-inline: 24px;
-}
-
-/* Spec text */
-.spec-text {
-  font-family: var(--font-body);
-  font-size: 13px;
-  line-height: 20px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--color-text-muted);
-  font-weight: 400;
-}
-
-/* Accent rule (saddle-tan hairline used as micro-accent) */
-.accent-rule {
-  display: block;
-  width: 32px;
-  height: 1px;
-  background-color: var(--color-accent);
-}
-
-/* === ALDER DESIGN TOKENS === */
-:root {
+  /* Colour */
   --color-bg: #F5F0E8;
   --color-surface: #EDE7D9;
   --color-text: #2C1A0E;
@@ -146,27 +16,29 @@ h1, h2, h3, h4 {
   --color-accent-hover: #8A5222;
   --color-border: rgba(44, 26, 14, 0.12);
   --color-focus: #A0622A;
+
+  /* Typography — families */
   --font-display: "Tiempos Headline", "Instrument Serif", Georgia, serif;
   --font-body: "Söhne", "Geist Sans", system-ui, sans-serif;
+
+  /* Typography — type scale */
   --text-display: 64px;
   --text-display-lh: 68px;
-  --text-display-mobile: 40px;
-  --text-display-lh-mobile: 46px;
+  --text-display-tracking: -0.03em;
   --text-h2: 36px;
   --text-h2-lh: 42px;
-  --text-h2-mobile: 26px;
-  --text-h2-lh-mobile: 32px;
+  --text-h2-tracking: -0.01em;
   --text-h3: 22px;
   --text-h3-lh: 28px;
-  --text-h3-mobile: 19px;
-  --text-h3-lh-mobile: 25px;
   --text-body: 17px;
   --text-body-lh: 28px;
-  --text-body-mobile: 16px;
-  --text-body-lh-mobile: 26px;
   --text-spec: 13px;
   --text-spec-lh: 20px;
+  --text-spec-tracking: 0.06em;
   --text-nav: 18px;
+  --text-nav-tracking: 0.08em;
+
+  /* Spacing — 8px base scale */
   --space-xs: 4px;
   --space-sm: 8px;
   --space-md: 16px;
@@ -175,19 +47,50 @@ h1, h2, h3, h4 {
   --space-xxl: 48px;
   --space-huge: 80px;
   --space-section: 96px;
-  --space-hero-top: 96px;
-  --space-hero-bottom: 128px;
+
+  /* Layout */
   --max-width: 860px;
-  --hairline: 1px;
+  --radius-card: 4px;
+  --radius-none: 0px;
+
+  /* Easing */
   --ease-out: cubic-bezier(0.0, 0.0, 0.2, 1);
   --ease-in-out: cubic-bezier(0.4, 0.0, 0.2, 1);
-  --btn-height: 40px;
-  --btn-padding-x: 24px;
-  --btn-radius: 0px;
-  --card-radius: 4px;
-  --input-radius: 0px;
 }
-html, body {
+
+/* --------------------------------------------------------------------------
+   2. Mobile token overrides
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  :root {
+    --text-display: 40px;
+    --text-display-lh: 46px;
+    --text-h2: 26px;
+    --text-h2-lh: 32px;
+    --text-h3: 19px;
+    --text-h3-lh: 25px;
+    --text-body: 16px;
+    --text-body-lh: 26px;
+  }
+
+  .container {
+    padding-inline: var(--space-lg);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   3. Base reset
+   -------------------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
   overflow-x: clip;
   background-color: var(--color-bg);
   color: var(--color-text);
@@ -196,61 +99,98 @@ html, body {
   line-height: var(--text-body-lh);
   font-weight: 300;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
-:focus-visible {
+
+/* --------------------------------------------------------------------------
+   4. Focus ring system
+   -------------------------------------------------------------------------- */
+*:focus {
+  outline: 2px solid transparent;
+  outline-offset: 1px;
+}
+
+*:focus-visible {
   outline: 2px solid var(--color-focus);
-  outline-offset: 2px;
+  outline-offset: 1px;
 }
+
+/* --------------------------------------------------------------------------
+   5. Reduced motion
+   -------------------------------------------------------------------------- */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
 }
-.prose-container { max-width: 65ch; }
-.section-inner {
+
+/* --------------------------------------------------------------------------
+   6. Typography base
+   -------------------------------------------------------------------------- */
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  color: var(--color-text);
+  overflow-wrap: anywhere;
+  min-width: 0;
+}
+
+/* --------------------------------------------------------------------------
+   7. Utility classes
+   -------------------------------------------------------------------------- */
+.hairline {
+  border: none;
+  border-top: 1px solid var(--color-border);
+}
+
+.container {
   max-width: var(--max-width);
   margin-inline: auto;
   padding-inline: var(--space-xl);
 }
-.hairline {
-  border: none;
-  border-top: var(--hairline) solid var(--color-border);
-}
-.spec-text {
-  font-family: var(--font-body);
-  font-size: var(--text-spec);
-  line-height: var(--text-spec-lh);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  font-weight: 400;
-  color: var(--color-text-muted);
-}
+
+/* --------------------------------------------------------------------------
+   8. Button — primary
+   -------------------------------------------------------------------------- */
 .btn-primary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: var(--btn-height);
-  padding-inline: var(--btn-padding-x);
+  height: 40px;
+  padding-inline: var(--space-lg);
   background-color: var(--color-accent);
   color: var(--color-text);
   font-family: var(--font-body);
   font-size: var(--text-spec);
-  font-weight: 400;
-  letter-spacing: 0.06em;
+  line-height: var(--text-spec-lh);
+  letter-spacing: var(--text-spec-tracking);
   text-transform: uppercase;
-  text-decoration: none;
-  border-radius: var(--btn-radius);
+  font-weight: 400;
   border: none;
+  border-radius: var(--radius-none);
   cursor: pointer;
-  white-space: nowrap;
-  outline: 2px solid transparent;
-  outline-offset: 1px;
-  transition: background-color 150ms var(--ease-out);
+  text-decoration: none;
+  transition: background-color 150ms var(--ease-out), transform 100ms var(--ease-out);
 }
-.btn-primary:hover { background-color: var(--color-accent-hover); }
-.btn-primary:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
-.btn-primary:active { background-color: var(--color-accent-hover); transform: translateY(1px); }
+
+.btn-primary:hover {
+  background-color: var(--color-accent-hover);
+}
+
+.btn-primary:active {
+  background-color: var(--color-accent-hover);
+  transform: translateY(1px);
+}
+
 .btn-primary:disabled,
-.btn-primary[aria-disabled="true"] { opacity: 0.55; cursor: not-allowed; }
+.btn-primary[aria-disabled="true"] {
+  opacity: 0.55;
+  cursor: not-allowed;
+  pointer-events: none;
+}
