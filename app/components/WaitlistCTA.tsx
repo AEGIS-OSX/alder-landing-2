@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, type FormEvent } from "react";
 import { motion } from "framer-motion";
 
 type Status = "idle" | "loading" | "success" | "error";
@@ -11,7 +11,7 @@ export default function WaitlistCTA() {
   const [status, setStatus] = useState<Status>("idle");
   const [errorMsg, setErrorMsg] = useState("");
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
     if (!EMAIL_RE.test(email)) {
