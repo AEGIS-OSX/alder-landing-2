@@ -82,10 +82,10 @@ export default function MakingProcess() {
                   {...motionProps}
                   className="relative py-[48px]"
                 >
-                  {/* Decorative large numeral */}
+                  {/* Decorative large numeral — top: 0 per spec */}
                   <span
                     aria-hidden="true"
-                    className="absolute top-[48px] left-[-16px] font-[family-name:var(--font-display)] text-[80px] leading-none font-normal text-[var(--color-text)] opacity-[0.12] select-none pointer-events-none"
+                    className="absolute top-0 left-[-16px] font-[family-name:var(--font-display)] text-[80px] leading-none font-normal text-[var(--color-text)] opacity-[0.12] select-none pointer-events-none"
                   >
                     {step.number}
                   </span>
@@ -110,7 +110,7 @@ export default function MakingProcess() {
                       <h3 className="font-[family-name:var(--font-display)] text-[19px] leading-[25px] md:text-[22px] md:leading-[28px] font-normal text-[var(--color-text)] mb-[16px]">
                         {step.title}
                       </h3>
-                      <p className="font-[family-name:var(--font-body)] text-[17px] leading-[28px] font-light text-[var(--color-text-muted)] max-w-[52ch]">
+                      <p className="font-[family-name:var(--font-body)] text-[16px] leading-[26px] md:text-[17px] md:leading-[28px] font-light text-[var(--color-text-muted)] max-w-[52ch]">
                         {step.body}
                       </p>
                     </div>
